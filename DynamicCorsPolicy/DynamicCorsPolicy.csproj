@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Hubert Mijalski</Authors>
+    <Company>Hubisoft</Company>
+    <PackageId>Mijalski.DynamicCorsPolicy</PackageId>
+    <Description>CORS policy with dynamic resolver allowing origins configured at the startup as well as others based on the implementation of the method. 
+This will allow to check CORS policies from eg. database or cache. 
+Leverages short-circuit evaluation and checks the method only in case of the origin missing from the one configured at startup. Based on default Asp .NET Core CORS package.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Mijalski/DynamicCorsPolicy</PackageProjectUrl>
+    <PackageTags>Cors, Cors Policy, Policy, Dynamic Cors, DynamicCors, Origin</PackageTags>
+    <PackageReleaseNotes>Refactoring</PackageReleaseNotes>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

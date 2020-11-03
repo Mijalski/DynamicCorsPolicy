@@ -11,7 +11,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace DynamicCorsPolicy.Services
 {
-    public class DynamicCorsPolicyService : IDynamicCorsPolicyService
+    internal class DynamicCorsPolicyService : IDynamicCorsPolicyService
     {
         private readonly CorsOptions _options;
         private readonly IDynamicCorsPolicyResolver _dynamicCorsPolicyResolver;

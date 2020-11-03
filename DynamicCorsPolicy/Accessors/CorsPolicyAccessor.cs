@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace DynamicCorsPolicy.Accessors
 {
-    public class CorsPolicyAccessor : ICorsPolicyAccessor
+    internal class CorsPolicyAccessor : ICorsPolicyAccessor
     {
         private readonly CorsOptions _options;
 

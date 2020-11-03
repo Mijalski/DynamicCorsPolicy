@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace DynamicCorsPolicy.Middlewares
 {
-    public class DynamicCorsPolicyMiddleware
+    internal class DynamicCorsPolicyMiddleware
     {
         private readonly Func<object, Task> _onResponseStartingDelegate = OnResponseStarting;
         private readonly RequestDelegate _next;
@@ -87,7 +87,7 @@ namespace DynamicCorsPolicy.Middlewares
     // Extension method used to add the middleware to the HTTP request pipeline.
     public static class CorsMiddlewareExtensions
     {
-        public static IApplicationBuilder UseCloudCorsMiddleware(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseDynamicCorsMiddleware(this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<DynamicCorsPolicyMiddleware>();
         }

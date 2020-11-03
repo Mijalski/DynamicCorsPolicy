@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace DynamicCorsPolicy.Services
 {
-    public interface IDynamicCorsPolicyService
+    internal interface IDynamicCorsPolicyService
     {
         void ApplyResult(CorsResult result, HttpResponse response);
 

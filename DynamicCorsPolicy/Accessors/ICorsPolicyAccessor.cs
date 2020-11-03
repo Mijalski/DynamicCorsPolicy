@@ -2,7 +2,7 @@
 
 namespace DynamicCorsPolicy.Accessors
 {
-    public interface ICorsPolicyAccessor
+    internal interface ICorsPolicyAccessor
     {
         CorsPolicy GetPolicy();
         CorsPolicy GetPolicy(string name);
