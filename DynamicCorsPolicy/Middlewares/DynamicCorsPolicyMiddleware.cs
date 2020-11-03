@@ -6,6 +6,7 @@ using DynamicCorsPolicy.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DynamicCorsPolicy.Middlewares
 {
@@ -89,6 +90,11 @@ namespace DynamicCorsPolicy.Middlewares
     {
         public static IApplicationBuilder UseDynamicCorsMiddleware(this IApplicationBuilder builder)
         {
+            var serviceProvider = new ServiceCollection()
+                .AddTransient<IDynamicCorsPolicyService, DynamicCorsPolicyService>()
+                .AddTransient<ICorsPolicyAccessor, CorsPolicyAccessor>()
+                .BuildServiceProvider();
+
             return builder.UseMiddleware<DynamicCorsPolicyMiddleware>();
         }
     }
