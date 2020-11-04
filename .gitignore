@@ -1,3 +1,5 @@
 DynamicCorsPolicy/obj/
 DynamicCorsPolicy/bin/
 .vs/
+DynamicCorsPolicy.Tests/bin/
+DynamicCorsPolicy.Tests/obj/
