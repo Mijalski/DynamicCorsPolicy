@@ -3,10 +3,8 @@ using System.Threading.Tasks;
 using DynamicCorsPolicy.Accessors;
 using DynamicCorsPolicy.Enums;
 using DynamicCorsPolicy.Services;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace DynamicCorsPolicy.Middlewares
 {
@@ -77,25 +75,11 @@ namespace DynamicCorsPolicy.Middlewares
             {
                 middleware.CorsService.ApplyResult(result, context.Response);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 //middleware.Logger.LogError(exception.Message);
             }
             return Task.CompletedTask;
-        }
-    }
-
-    // Extension method used to add the middleware to the HTTP request pipeline.
-    public static class CorsMiddlewareExtensions
-    {
-        public static IApplicationBuilder UseDynamicCorsMiddleware(this IApplicationBuilder builder)
-        {
-            var serviceProvider = new ServiceCollection()
-                .AddTransient<IDynamicCorsPolicyService, DynamicCorsPolicyService>()
-                .AddTransient<ICorsPolicyAccessor, CorsPolicyAccessor>()
-                .BuildServiceProvider();
-
-            return builder.UseMiddleware<DynamicCorsPolicyMiddleware>();
         }
     }
 }
