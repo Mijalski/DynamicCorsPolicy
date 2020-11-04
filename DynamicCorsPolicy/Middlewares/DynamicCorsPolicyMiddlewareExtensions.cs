@@ -24,24 +24,11 @@ namespace DynamicCorsPolicy.Middlewares
             Action<CorsOptions> setupAction)
             where TDynamicCorsPolicyResolver : class, IDynamicCorsPolicyResolver
         {
-            if (services == null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
-            if (setupAction == null)
-            {
-                throw new ArgumentNullException(nameof(setupAction));
-            }
+            services.AddCors(setupAction);
 
             services.TryAdd(ServiceDescriptor.Transient<IDynamicCorsPolicyService, DynamicCorsPolicyService>());
             services.TryAdd(ServiceDescriptor.Transient<ICorsPolicyAccessor, CorsPolicyAccessor>());
             services.TryAdd(ServiceDescriptor.Transient<IDynamicCorsPolicyResolver, TDynamicCorsPolicyResolver>());
-
-            services.AddOptions();
-            services.AddSingleton<IConfigureOptions<CorsOptions>>(
-                new ConfigureNamedOptions<CorsOptions>(CorsPoliciesEnums.DynamicCorsPolicyName, setupAction)
-            );
 
             return services;
         }
