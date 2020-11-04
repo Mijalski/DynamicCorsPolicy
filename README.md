@@ -16,7 +16,7 @@ Firstly, create a class implementing interface `IDynamicCorsPolicyResolver`.
 
 In Startup.ConfigureServices
 
-replace: `services.AddCors();` with `services.AddDynamicCors<ExampleCorsPolicyResolver>();`.
+replace: `services.AddCors();` with `services.AddDynamicCors<ExampleCorsPolicyResolver>();` and set policy name to: `CorsPoliciesEnums.DynamicCorsPolicyName`.
 
 Lastly in Startup.Configure
 
