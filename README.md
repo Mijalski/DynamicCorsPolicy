@@ -68,9 +68,11 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 ## FAQ
 
 Q: Will it be slower than regular CORS policy?
+
 A: For origins specified at startup the speed will be the same, but for the external origins it will need to evaluate the custom logic written by you, as a part of ResolveForOrigin method.
 
 Q: Is it based on ASP.NETCore CORS package?
+
 A: Yes, it uses the same buildier and everything, but exposed additional method to implement custom logic.
 
 ## Contributing
