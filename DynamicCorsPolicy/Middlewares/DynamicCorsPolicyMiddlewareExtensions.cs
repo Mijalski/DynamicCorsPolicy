@@ -1,7 +1,6 @@
 ﻿using System;
 using DynamicCorsPolicy.Accessors;
 using DynamicCorsPolicy.Enums;
-using DynamicCorsPolicy.Options;
 using DynamicCorsPolicy.Resolvers;
 using DynamicCorsPolicy.Services;
 using Microsoft.AspNetCore.Builder;
@@ -21,7 +20,9 @@ namespace DynamicCorsPolicy.Middlewares
             return builder.UseMiddleware<DynamicCorsPolicyMiddleware>();
         }
 
-        public static IServiceCollection AddDynamicCors(this IServiceCollection services, Action<DynamicCorsOptions> setupAction)
+        public static IServiceCollection AddDynamicCors<TDynamicCorsPolicyResolver>(this IServiceCollection services, 
+            Action<CorsOptions> setupAction)
+            where TDynamicCorsPolicyResolver : class, IDynamicCorsPolicyResolver
         {
             if (services == null)
             {
@@ -35,10 +36,11 @@ namespace DynamicCorsPolicy.Middlewares
 
             services.TryAdd(ServiceDescriptor.Transient<IDynamicCorsPolicyService, DynamicCorsPolicyService>());
             services.TryAdd(ServiceDescriptor.Transient<ICorsPolicyAccessor, CorsPolicyAccessor>());
+            services.TryAdd(ServiceDescriptor.Transient<IDynamicCorsPolicyResolver, TDynamicCorsPolicyResolver>());
 
             services.AddOptions();
-            services.AddSingleton<IConfigureOptions<DynamicCorsOptions>>(
-                new ConfigureNamedOptions<DynamicCorsOptions>(CorsPoliciesEnums.DynamicCorsPolicyName, setupAction)
+            services.AddSingleton<IConfigureOptions<CorsOptions>>(
+                new ConfigureNamedOptions<CorsOptions>(CorsPoliciesEnums.DynamicCorsPolicyName, setupAction)
             );
 
             return services;

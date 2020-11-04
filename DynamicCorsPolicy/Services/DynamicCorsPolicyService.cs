@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using DynamicCorsPolicy.Options;
 using DynamicCorsPolicy.Resolvers;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
@@ -14,10 +13,11 @@ namespace DynamicCorsPolicy.Services
 {
     internal class DynamicCorsPolicyService : IDynamicCorsPolicyService
     {
-        private readonly DynamicCorsOptions _options;
+        private readonly CorsOptions _options;
         private readonly IDynamicCorsPolicyResolver _dynamicCorsPolicyResolver;
 
-        public DynamicCorsPolicyService(IOptions<DynamicCorsOptions> options)
+        public DynamicCorsPolicyService(IOptions<CorsOptions> options,
+            IDynamicCorsPolicyResolver dynamicCorsPolicyResolver)
         {
             if (options == null)
             {
@@ -25,7 +25,7 @@ namespace DynamicCorsPolicy.Services
             }
 
             _options = options.Value;
-            _dynamicCorsPolicyResolver = _options.GetDynamicCorsPolicyResolver() ?? new DefaultDynamicCorsPolicyResolver();
+            _dynamicCorsPolicyResolver = dynamicCorsPolicyResolver;
         }
 
         public async Task<CorsResult> EvaluatePolicy(HttpContext context, string policyName)
