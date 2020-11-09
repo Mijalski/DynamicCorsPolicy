@@ -18,7 +18,7 @@ In Startup.ConfigureServices
 
 replace: `services.AddCors();` with `services.AddDynamicCors<ExampleCorsPolicyResolver>();` and set policy name to: `CorsPoliciesEnums.DynamicCorsPolicyName`.
 
-Lastly in Startup.Configure
+Lastly, in Startup.Configure
 
 replace: `app.UseCors();` with `app.UseDynamicCorsMiddleware();`.
 
@@ -73,7 +73,7 @@ A: For origins specified at startup the speed will be the same, but for the exte
 
 Q: Is it based on ASP.NETCore CORS package?
 
-A: Yes, it uses the same buildier and everything, but exposed additional method to implement custom logic.
+A: Yes, it uses the same buildier and pipeline, but exposes an additional method to implement custom logic.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
